@@ -1,50 +1,21 @@
 # Countdown-
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-p {
-  text-align: center;
-  font-size: 60px;
-  margin-top: 0px;
-}
-</style>
-</head>
-<body>
 
-<p id="demo"></p>
+import time
 
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("May 20, 2026 15:37:25").getTime();
+def countdown_timer(seconds):
+    while seconds > 0:
+        # Calculate minutes and remaining seconds
+        mins, secs = divmod(seconds, 60)
+        # Format as MM:SS with zero padding
+        timer_format = f"{mins:02d}:{secs:02d}"
+        
+        # Print using \r to overwrite the line, and flush=True to force immediate display
+        print(f"Time remaining: {timer_format}", end="\r", flush=True)
+        
+        time.sleep(1)
+        seconds -= 1
+        
+    print("\nTime's up!      ")
 
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get today's date and time
-  var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-  }
-}, 1000);
-</script>
-
-</body>
-</html>
+# Example: Run a 5-minute countdown (300 seconds)
+countdown_timer(300)
